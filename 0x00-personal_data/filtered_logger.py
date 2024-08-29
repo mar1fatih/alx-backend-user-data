@@ -24,10 +24,12 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields):
+        """ constructor """
         self.fields = fields
         super(RedactingFormatter, self).__init__(self.FORMAT)
 
     def format(self, record: logging.LogRecord) -> str:
+        """ format method to obfuscated message """
         new_msg = filter_datum(self.fields, self.REDACTION,
                                logging.Formatter.format(self, record=record),
                                self.SEPARATOR)
