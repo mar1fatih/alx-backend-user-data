@@ -3,6 +3,7 @@
 import re
 import logging
 from typing import List
+import mysql.connector
 
 
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
@@ -47,3 +48,14 @@ def get_logger() -> logging.Logger:
     stream.setFormatter(RedactingFormatter(PII_FIELDS))
     user.addHandler(stream)
     return user
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """connect to holberton database to read a users table"""
+    mySql = mysql.connector.connection.MySQLConnection(
+        user=getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
+        password=getenv('PERSONAL_DATA_DB_PASSWORD', ''),
+        host=getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
+        database=getenv('PERSONAL_DATA_DB_NAME'),
+        )
+    return mySql
