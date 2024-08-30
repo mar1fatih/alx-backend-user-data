@@ -37,6 +37,7 @@ class RedactingFormatter(logging.Formatter):
                          self.SEPARATOR)
         return n
 
+
 def get_logger() -> logging.Logger:
     """ get logger method """
     user = logging.getLogger('user_data')
