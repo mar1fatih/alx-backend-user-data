@@ -7,7 +7,7 @@ from typing import List, TypeVar
 class Auth():
     """ class to manage the API authentication """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """ returns False """
+        """ returns True if the path is not in the list excluded_paths """
         if not path:
             return True
         if not excluded_paths and len(excluded_paths) == 0:
