@@ -10,7 +10,9 @@ class Auth():
         """ returns True if the path is not in the list excluded_paths """
         if not path:
             return True
-        if not excluded_paths and len(excluded_paths) == 0:
+        if not excluded_paths:
+            return True
+        if len(excluded_paths) == 0:
             return True
         if path[-1] == '/':
             if path in excluded_paths:
