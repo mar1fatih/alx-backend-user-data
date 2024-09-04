@@ -45,3 +45,19 @@ class BasicAuth(Auth):
             b64.pop(0)
             password = ':'.join(b64)
         return (email, password)
+
+    def user_object_from_credentials(self, user_email: str,
+                                     user_pwd: str) -> TypeVar('User'):
+        """return User instance based on email and password"""
+        if not user_email or type(user_email) is not str:
+            return None
+        if not user_pwd or type(user_pwd) is not str:
+            return None
+        user = User()
+        last_user = user.search({'email': user_email})
+        if not last_user:
+            return None
+        for user in last_user:
+            if user.is_valid_password(user_pwd):
+                return user
+        return None
