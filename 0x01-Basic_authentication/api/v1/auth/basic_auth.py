@@ -74,4 +74,4 @@ class BasicAuth(Auth):
         user = self.extract_user_credentials(dcd)
         user_email = user[0]
         user_pwd = user[1]
-         return self.user_object_from_credentials(user_email, user_pwd)
+        return self.user_object_from_credentials(user_email, user_pwd)
