@@ -3,6 +3,7 @@
 import base64
 from api.v1.auth.auth import Auth
 from typing import TypeVar
+from models.user import User
 
 
 class BasicAuth(Auth):
@@ -58,7 +59,7 @@ class BasicAuth(Auth):
         last_user = user.search({'email': user_email})
         if not last_user:
             return None
-        for usr in last_user:
-            if usr.is_valid_password(user_pwd):
-                return usr
+        for user in last_user:
+            if user.is_valid_password(user_pwd):
+                return user
         return None
