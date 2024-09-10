@@ -42,7 +42,8 @@ class DB:
         """ returns the first row found in the users table"""
         for key, value in kwargs.items():
             if hasattr(User, key):
-                usr = self._session.query(User).filter_by(**{key: value}).first()
+                usr = self._session.query(
+                        User).filter_by(**{key: value}).first()
                 if usr:
                     return usr
                 else:
