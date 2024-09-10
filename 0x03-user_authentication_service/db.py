@@ -57,5 +57,6 @@ class DB:
             usr = self._session.query(User).filter_by(id=user_id).first()
             if hasattr(usr, k):
                 setattr(usr, k, v)
+                self._session.commit()
             else:
                 raise ValueError
