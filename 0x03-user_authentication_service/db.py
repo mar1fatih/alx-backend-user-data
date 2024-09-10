@@ -51,11 +51,11 @@ class DB:
             else:
                 raise InvalidRequestError
 
-    def update_user(self, user_id: str, **kwargs) -> None:
+    def update_user(self, user_id: str, **kwargs: dict) -> None:
         """update the user’s attributes as passed
         in the method’s arguments"""
         try:
-            usr = self.find_user_by(id=user_id)
+            usr: User = self.find_user_by(id=user_id)
             for k, v in kwargs.items():
                 if hasattr(usr, k):
                     setattr(usr, k, v)
