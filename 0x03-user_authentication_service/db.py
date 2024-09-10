@@ -53,10 +53,10 @@ class DB:
 
     def update_user(self, user_id: str, **kwargs) -> None:
         """update the user’s attributes as passed in the method’s arguments"""
-        for k, v in kwargs.items():
-            usr = self.find_user_by(k=v)
-            if usr:
+        try:
+            usr = self.find_user_by(id=user_id)
+            for k, v in kwargs.items():
                 setattr(usr, k, v)
                 self._session.commit()
-            else:
-                raise ValueError
+        except:
+            raise ValueError
