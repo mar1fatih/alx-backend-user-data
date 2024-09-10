@@ -40,6 +40,7 @@ def login():
     else:
         abort(401)
 
+
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout():
     """destroy the session and redirect the user to GET /"""
