@@ -55,3 +55,12 @@ class Auth:
         _id = _generate_uuid()
         setattr(usr, 'session_id', _id)
         return _id
+
+    def get_user_from_session_id(self, session_id: str) -> User:
+        """returns the corresponding User from session_id"""
+        if not session_id:
+            return None
+        try:
+            usr = self._db.find_user_by(session_id=session_id)
+        except NoResultFound or InvalidRequestError:
+            return None
