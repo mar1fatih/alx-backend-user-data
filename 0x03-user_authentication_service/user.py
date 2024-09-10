@@ -6,6 +6,7 @@ from sqlalchemy import Integer, String, Column
 
 Base = declarative_base()
 
+
 class User(Base):
     """ORM for user table"""
     __tablename__ = 'users'
