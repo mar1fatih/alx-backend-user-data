@@ -61,6 +61,6 @@ class DB:
                     setattr(usr, k, v)
                 else:
                     raise ValueError
-            self._session.commit()
         except NoResultFound or InvalidRequestError:
             raise ValueError
+        self._session.commit()
