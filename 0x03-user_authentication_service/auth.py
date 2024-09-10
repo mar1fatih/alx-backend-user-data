@@ -45,3 +45,13 @@ class Auth:
                 return False
         except NoResultFound or InvalidRequestError:
             return False
+
+    def create_session(self, email: str) -> str:
+        """store uuid in the database as session_id, and return it"""
+        try:
+            usr = self._db.find_user_by(email=email)
+        except NoResultFound or InvalidRequestError:
+            return None
+        _id = _generate_uuid()
+        setattr(usr, 'session_id', _id)
+        return _id
