@@ -62,5 +62,7 @@ class Auth:
             return None
         try:
             usr = self._db.find_user_by(session_id=session_id)
+            if not usr:
+                return None
         except NoResultFound or InvalidRequestError:
             return None
