@@ -52,11 +52,12 @@ class DB:
                 raise InvalidRequestError
 
     def update_user(self, user_id: str, **kwargs) -> None:
-        """update the user’s attributes as passed in the method’s arguments"""
+        """update the user’s attributes as passed
+        in the method’s arguments"""
         try:
             usr = self.find_user_by(id=user_id)
             for k, v in kwargs.items():
                 setattr(usr, k, v)
-                self._session.commit()
+            self._session.commit()
         except NoResultFound or InvalidRequestError:
             raise ValueError
