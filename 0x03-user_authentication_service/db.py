@@ -54,8 +54,8 @@ class DB:
     def update_user(self, user_id: str, **kwargs) -> None:
         """update the user’s attributes as passed in the method’s arguments"""
         for k, v in kwargs.items():
-            usr = self._session.query(User).filter_by(id=user_id).first()
-            if hasattr(usr, k):
+            usr = self.find_user_by(k=v)
+            if usr:
                 setattr(usr, k, v)
                 self._session.commit()
             else:
