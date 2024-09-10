@@ -58,5 +58,5 @@ class DB:
             for k, v in kwargs.items():
                 setattr(usr, k, v)
                 self._session.commit()
-        except:
+        except NoResultFound, InvalidRequestError:
             raise ValueError
