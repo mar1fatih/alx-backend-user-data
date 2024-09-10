@@ -6,6 +6,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from user import User, Base
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 
 
 class DB:
@@ -15,7 +17,7 @@ class DB:
     def __init__(self) -> None:
         """Initialize a new DB instance
         """
-        self._engine = create_engine("sqlite:///a.db", echo=True)
+        self._engine = create_engine("sqlite:///a.db", echo=False)
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
@@ -35,3 +37,15 @@ class DB:
         self._session.add(usr)
         self._session.commit()
         return usr
+
+    def find_user_by(self, **kwargs) -> User:
+        """ returns the first row found in the users table"""
+        for key, value in kwargs.items():
+            if hasattr(User, key):
+                usr = self._session.query(User).filter_by(**{key: value}).first()
+                if usr:
+                    return usr
+                else:
+                    raise NoResultFound
+            else:
+                raise InvalidRequestError
