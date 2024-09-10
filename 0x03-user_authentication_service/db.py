@@ -50,3 +50,12 @@ class DB:
                     raise NoResultFound
             else:
                 raise InvalidRequestError
+
+    def update_user(self, user_id: str, **kwargs) -> None:
+        """update the user’s attributes as passed in the method’s arguments"""
+        for k, v in kwargs.items():
+            usr = self._session.query(User).filter_by(id=user_id).first()
+            if hasattr(usr, k):
+                setattr(usr, k, v)
+            else:
+                raise ValueError
