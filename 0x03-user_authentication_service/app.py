@@ -55,6 +55,7 @@ def logout():
     else:
         abort(403)
 
+
 @app.route('/profile', methods=['GET'], strict_slashes=False)
 def profile():
     """ respond with a 200 HTTP status if  the user exist"""
